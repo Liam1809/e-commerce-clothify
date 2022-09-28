@@ -1,7 +1,7 @@
 import React from 'react';
 
-const shopRoute = () => {
+const ShopRoute = () => {
   return <div>shopRoute</div>;
 };
 
-export default shopRoute;
+export default ShopRoute;

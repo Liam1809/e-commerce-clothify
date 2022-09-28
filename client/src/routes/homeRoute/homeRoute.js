@@ -6,7 +6,7 @@ const ErrorBoundary = lazy(() =>
 );
 const Categories = lazy(() => import('../../components/Categories/Categories'));
 
-const homeRoute = () => {
+const HomeRoute = () => {
   return (
     <Fragment>
       <ErrorBoundary>
@@ -16,4 +16,4 @@ const homeRoute = () => {
   );
 };
 
-export default homeRoute;
+export default HomeRoute;

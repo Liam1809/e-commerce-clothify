@@ -1,6 +1,10 @@
 import React, { Fragment } from 'react';
 import { Link, Outlet } from 'react-router-dom';
-import { HOME_ROUTE, SHOP_ROUTE } from '../../constants/routes/routes';
+import {
+  HOME_ROUTE,
+  SHOP_ROUTE,
+  SIGN_IN_ROUTE,
+} from '../../constants/routes/routes';
 
 //import logo
 import { ReactComponent as LadiesLogo } from '../../assets/ladies.svg';
@@ -8,7 +12,7 @@ import { ReactComponent as GentsLogo } from '../../assets/gents.svg';
 
 import './styles.scss';
 
-const navRoute = () => {
+const NavRoute = () => {
   return (
     <Fragment>
       <div className="navigation">
@@ -26,7 +30,7 @@ const navRoute = () => {
           <Link className="nav-link" to={`/${SHOP_ROUTE}`}>
             Contact
           </Link>
-          <Link className="nav-link" to={`/${SHOP_ROUTE}`}>
+          <Link className="nav-link" to={`/${SIGN_IN_ROUTE}`}>
             Sign in
           </Link>
         </div>
@@ -36,4 +40,4 @@ const navRoute = () => {
   );
 };
 
-export default navRoute;
+export default NavRoute;
