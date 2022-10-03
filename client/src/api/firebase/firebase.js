@@ -46,11 +46,13 @@ export const db = getFirestore();
 
 // get and create user in Firestore Firebase
 export const getAndCreateUserFireBase = async userAuth => {
+  // get user doc reference
   const userDocRef = await doc(db, 'users', userAuth.uid);
+  // get data doc
+  const existedUser = await getDoc(userDocRef);
 
-  const userSnapshot = await getDoc(userDocRef);
-
-  if (!userSnapshot.exists()) {
+  // check if not exist then create user
+  if (!existedUser.exists()) {
     const { displayName, email } = userAuth;
 
     const createdAt = new Date();
