@@ -3,7 +3,7 @@ import { Link, Outlet } from 'react-router-dom';
 import {
   HOME_ROUTE,
   SHOP_ROUTE,
-  SIGN_IN_ROUTE,
+  AUTH_ROUTE,
 } from '../../constants/routes/routes';
 
 //import logo
@@ -30,7 +30,7 @@ const NavRoute = () => {
           <Link className="nav-link" to={`/${SHOP_ROUTE}`}>
             Contact
           </Link>
-          <Link className="nav-link" to={`/${SIGN_IN_ROUTE}`}>
+          <Link className="nav-link" to={`/${AUTH_ROUTE}`}>
             Sign in
           </Link>
         </div>
