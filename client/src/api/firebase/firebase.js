@@ -50,6 +50,8 @@ export const createAuthUserFromDocFireBase = async (
   userAuth,
   additionals = {}
 ) => {
+  if (!userAuth) return;
+
   // get user doc reference
   const userDocRef = await doc(db, 'users', userAuth.uid);
   // get data doc
@@ -80,10 +82,7 @@ export const createAuthUserWithEmailAndPasswordFirebase = async (
   email,
   password
 ) => {
-  if (!email || !password) {
-    return;
-  }
-  const response = await createUserWithEmailAndPassword(auth, email, password);
+  if (!email || !password) return;
 
-  return response;
+  return await createUserWithEmailAndPassword(auth, email, password);
 };

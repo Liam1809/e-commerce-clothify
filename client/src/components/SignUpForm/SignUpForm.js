@@ -29,8 +29,11 @@ const SignUpForm = () => {
         password
       );
 
-      const response = await createAuthUserFromDocFireBase(user);
+      const response = await createAuthUserFromDocFireBase(user, {
+        displayName,
+      });
 
+      clearFormFields();
       return response;
     } catch (error) {
       console.log(error);
@@ -39,7 +42,22 @@ const SignUpForm = () => {
 
   const handleOnChange = event => {
     const { name, value } = event.target;
-    setFormFields({ ...formFields, [name]: value });
+
+    const limitMaxCharacter = {
+      displayName: 15,
+      email: 30,
+      password: 20,
+      confirmPassword: 20,
+    };
+
+    setFormFields({
+      ...formFields,
+      [name]: value.slice(0, limitMaxCharacter[name] - 1),
+    });
+  };
+
+  const clearFormFields = () => {
+    setFormFields(initialFormFields);
   };
   return (
     <Fragment>
@@ -53,6 +71,7 @@ const SignUpForm = () => {
             type: 'text',
             value: displayName,
             onChange: handleOnChange,
+            minLength: 10,
           }}
         />
         <FormInput
@@ -63,6 +82,7 @@ const SignUpForm = () => {
             type: 'email',
             value: email,
             onChange: handleOnChange,
+            minLength: 15,
           }}
         />
         <FormInput
@@ -73,6 +93,7 @@ const SignUpForm = () => {
             type: 'password',
             value: password,
             onChange: handleOnChange,
+            minLength: 8,
           }}
         />
         <FormInput
@@ -83,12 +104,13 @@ const SignUpForm = () => {
             type: 'password',
             value: confirmPassword,
             onChange: handleOnChange,
+            minLength: 8,
           }}
         />
         <label htmlFor="submitButton">Submit</label>
         <input id="submitButton" name="submitButton" type="submit" />
-        <label htmlFor="submitButton">Submit</label>
-        <input id="submitButton" name="submitButton" type="submit" />
+        {/* <label htmlFor="submitButton">Submit</label>
+        <input id="submitButton" name="submitButton" type="submit" /> */}
       </form>
     </Fragment>
   );
