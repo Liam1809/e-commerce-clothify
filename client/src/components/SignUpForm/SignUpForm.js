@@ -36,7 +36,12 @@ const SignUpForm = () => {
       clearFormFields();
       return response;
     } catch (error) {
-      console.log(error);
+      if (error.code === 'auth/email-already-in-use') {
+        alert('Wrong or existed credentials');
+      } else {
+        alert('User creation encountered an error');
+      }
+      clearFormFields();
     }
   };
 
@@ -45,9 +50,9 @@ const SignUpForm = () => {
 
     const limitMaxCharacter = {
       displayName: 15,
-      email: 30,
-      password: 20,
-      confirmPassword: 20,
+      email: 35,
+      password: 25,
+      confirmPassword: 25,
     };
 
     setFormFields({
