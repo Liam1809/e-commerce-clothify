@@ -3,6 +3,7 @@ import {
   createAuthUserFromDocFireBase,
   createAuthUserWithEmailAndPasswordFirebase,
 } from '../../api/firebase/firebase';
+import { AuthErrorCodes } from 'firebase/auth';
 import FormInput from '../FormInput/FormInput';
 
 const initialFormFields = {
@@ -36,7 +37,7 @@ const SignUpForm = () => {
       clearFormFields();
       return response;
     } catch (error) {
-      if (error.code === 'auth/email-already-in-use') {
+      if (error.code === AuthErrorCodes.EMAIL_EXISTS) {
         alert('Wrong or existed credentials');
       } else {
         alert('User creation encountered an error');
