@@ -6,6 +6,8 @@ import {
 import { AuthErrorCodes } from 'firebase/auth';
 import FormInput from '../FormInput/FormInput';
 
+import './styles.scss';
+
 const initialFormFields = {
   displayName: '',
   email: '',
@@ -67,57 +69,52 @@ const SignUpForm = () => {
   };
   return (
     <Fragment>
-      <h1>Register Now</h1>
-      <form onSubmit={handleSubmit}>
-        <FormInput
-          id="displayName"
-          label="Display Name"
-          options={{
-            name: 'displayName',
-            type: 'text',
-            value: displayName,
-            onChange: handleOnChange,
-            minLength: 10,
-          }}
-        />
-        <FormInput
-          id="email"
-          label="Email"
-          options={{
-            name: 'email',
-            type: 'email',
-            value: email,
-            onChange: handleOnChange,
-            minLength: 15,
-          }}
-        />
-        <FormInput
-          id="password"
-          label="Password"
-          options={{
-            name: 'password',
-            type: 'password',
-            value: password,
-            onChange: handleOnChange,
-            minLength: 8,
-          }}
-        />
-        <FormInput
-          id="confirmPassword"
-          label="Confirm Password"
-          options={{
-            name: 'confirmPassword',
-            type: 'password',
-            value: confirmPassword,
-            onChange: handleOnChange,
-            minLength: 8,
-          }}
-        />
-        <label htmlFor="submitButton">Submit</label>
-        <input id="submitButton" name="submitButton" type="submit" />
-        {/* <label htmlFor="submitButton">Submit</label>
+      <div className="sign-up-container">
+        <h2>Register Now</h2>
+        <span>Sign up with your Email and Password</span>
+        <form onSubmit={handleSubmit}>
+          <FormInput
+            id="displayName"
+            label="Display Name"
+            name="displayName"
+            type="text"
+            value={displayName}
+            onChange={handleOnChange}
+            minLength="10"
+          />
+          <FormInput
+            id="email"
+            label="Email"
+            name="email"
+            type="email"
+            value={email}
+            onChange={handleOnChange}
+            minLength="15"
+          />
+          <FormInput
+            id="password"
+            label="Password"
+            name="password"
+            type="password"
+            value={password}
+            onChange={handleOnChange}
+            minLength="8"
+          />
+          <FormInput
+            id="confirmPassword"
+            label="Confirm Password"
+            name="confirmPassword"
+            type="password"
+            value={confirmPassword}
+            onChange={handleOnChange}
+            minLength="8"
+          />
+          <label htmlFor="submitButton">Submit</label>
+          <input id="submitButton" name="submitButton" type="submit" />
+          {/* <label htmlFor="submitButton">Submit</label>
         <input id="submitButton" name="submitButton" type="submit" /> */}
-      </form>
+        </form>
+      </div>
     </Fragment>
   );
 };
