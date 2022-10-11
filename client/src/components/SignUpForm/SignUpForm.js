@@ -1,6 +1,5 @@
 import React, { Fragment, useState } from 'react';
 import {
-  signInWithGooglePopup,
   createAuthUserFromDocFireBase,
   createAuthUserWithEmailAndPasswordFirebase,
 } from '../../api/firebase/firebase';
@@ -9,8 +8,6 @@ import { AuthErrorCodes } from 'firebase/auth';
 
 import Button from '../Button/Button';
 import FormInput from '../FormInput/FormInput';
-
-import { BUTTON_TYPES } from '../../constants/buttons/buttons';
 
 import './styles.scss';
 
@@ -24,28 +21,6 @@ const initialFormFields = {
 const SignUpForm = () => {
   const [formFields, setFormFields] = useState(initialFormFields);
   const { displayName, email, password, confirmPassword } = formFields;
-
-  // uncomment to use login google with redirect
-  // useEffect(() => {
-  //   async function loginGoogleWithRedirect() {
-  //     const { user } = await getRedirectResult(auth);
-
-  //     if (user) {
-  //       const response = await createAuthUserFromDocFireBase(user);
-
-  //       console.log(response);
-  //     }
-  //   }
-  //   loginGoogleWithRedirect();
-  // }, []);
-
-  const loginGoogleWithPopup = async () => {
-    const { user } = await signInWithGooglePopup();
-
-    const response = await createAuthUserFromDocFireBase(user);
-
-    return response;
-  };
 
   const handleSubmit = async event => {
     event.preventDefault();
@@ -138,21 +113,7 @@ const SignUpForm = () => {
             minLength="8"
           />
           <div className="buttons-container">
-            <Button type="submit">Sign In</Button>
-            <Button
-              buttonType={BUTTON_TYPES.google}
-              type="button"
-              onClick={() => loginGoogleWithPopup()}
-            >
-              Google Sign in
-            </Button>
-            {/* <Button
-            buttonType={BUTTON_TYPES.google}
-            type="button"
-            onClick={() => signInWithGoogleRedirect()}
-          >
-            Google Sign-in
-          </Button> */}
+            <Button type="submit">Register</Button>
           </div>
         </form>
       </div>

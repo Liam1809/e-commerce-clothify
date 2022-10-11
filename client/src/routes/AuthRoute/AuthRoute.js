@@ -1,6 +1,11 @@
 import React, { Fragment, lazy, Suspense } from 'react';
 
+import './styles.scss';
+
 const AuthRoute = () => {
+  const SignInForm = lazy(() =>
+    import('../../components/SignInForm/SignInForm')
+  );
   const SignUpForm = lazy(() =>
     import('../../components/SignUpForm/SignUpForm')
   );
@@ -8,7 +13,10 @@ const AuthRoute = () => {
   return (
     <Fragment>
       <Suspense fallback={<div>Loading</div>}>
-        <SignUpForm />
+        <div className="auth-container">
+          <SignInForm />
+          <SignUpForm />
+        </div>
       </Suspense>
     </Fragment>
   );
