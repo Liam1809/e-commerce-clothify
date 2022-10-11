@@ -1,10 +1,17 @@
 import React, { Fragment } from 'react';
+import { BUTTON_TYPES } from '../../constants/buttons/buttons';
 
-const Button = ({ id, label, options }) => {
+import './styles.scss';
+
+const Button = ({ buttonType, children, ...otherProps }) => {
   return (
     <Fragment>
-      <label htmlFor={id}>{label}</label>
-      <input id={id} {...options} />
+      <button
+        className={`${BUTTON_TYPES[buttonType]} button-container`}
+        {...otherProps}
+      >
+        {children}
+      </button>
     </Fragment>
   );
 };
