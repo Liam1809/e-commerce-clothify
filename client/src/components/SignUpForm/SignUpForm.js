@@ -86,7 +86,7 @@ const SignUpForm = () => {
             minLength="10"
           />
           <FormInput
-            id="email"
+            id="email-signup"
             label="Email"
             name="email"
             type="email"
@@ -95,7 +95,7 @@ const SignUpForm = () => {
             minLength="15"
           />
           <FormInput
-            id="password"
+            id="password-signup"
             label="Password"
             name="password"
             type="password"

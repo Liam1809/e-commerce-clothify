@@ -2,7 +2,7 @@ import React, { Fragment, useState } from 'react';
 import {
   signInWithGooglePopup,
   createAuthUserFromDocFireBase,
-  createAuthUserWithEmailAndPasswordFirebase,
+  signInAuthUserWithEmailAndPasswordFirebase,
 } from '../../api/firebase/firebase';
 import { AuthErrorCodes } from 'firebase/auth';
 // import { getRedirectResult } from 'firebase/auth';
@@ -38,8 +38,6 @@ const SignInForm = () => {
   // }, []);
 
   const loginGoogleWithPopup = async event => {
-    event.preventDefault();
-
     const { user } = await signInWithGooglePopup();
 
     const response = await createAuthUserFromDocFireBase(user);
@@ -50,26 +48,25 @@ const SignInForm = () => {
   const handleSubmit = async event => {
     event.preventDefault();
 
-    // try {
-    //   const { user } = await createAuthUserWithEmailAndPasswordFirebase(
-    //     email,
-    //     password
-    //   );
+    try {
+      const response = await signInAuthUserWithEmailAndPasswordFirebase(
+        email,
+        password
+      );
+      clearFormFields();
 
-    //   const response = await createAuthUserFromDocFireBase(user, {
-    //     displayName,
-    //   });
-
-    //   clearFormFields();
-    //   return response;
-    // } catch (error) {
-    //   if (error.code === AuthErrorCodes.EMAIL_EXISTS) {
-    //     alert('Wrong or existed credentials');
-    //   } else {
-    //     alert('User creation encountered an error');
-    //   }
-    //   clearFormFields();
-    // }
+      return response;
+    } catch (error) {
+      if (
+        error.code === AuthErrorCodes.USER_DELETED ||
+        error.code === AuthErrorCodes.INVALID_PASSWORD
+      ) {
+        alert('Wrong or existed credentials');
+      } else {
+        alert('User creation encountered an error');
+      }
+      clearFormFields();
+    }
   };
 
   const handleOnChange = event => {
@@ -98,7 +95,7 @@ const SignInForm = () => {
         <span>Sign In with your Email and Password</span>
         <form onSubmit={handleSubmit}>
           <FormInput
-            id="email"
+            id="email-signin"
             label="Email"
             name="email"
             type="email"
@@ -107,7 +104,7 @@ const SignInForm = () => {
             minLength="15"
           />
           <FormInput
-            id="password"
+            id="password-signin"
             label="Password"
             name="password"
             type="password"
@@ -121,7 +118,7 @@ const SignInForm = () => {
             <Button
               buttonType={BUTTON_TYPES.google}
               type="button"
-              onClick={loginGoogleWithPopup()}
+              onClick={() => loginGoogleWithPopup()}
             >
               Google Sign in
             </Button>
