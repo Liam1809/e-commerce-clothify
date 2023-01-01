@@ -1,4 +1,4 @@
-import React, { Fragment, useState } from 'react';
+import React, { Fragment, useState, useContext } from 'react';
 import {
   signInWithGooglePopup,
   createAuthUserFromDocFireBase,
@@ -13,6 +13,7 @@ import FormInput from '../FormInput/FormInput';
 import { BUTTON_TYPES } from '../../constants/buttons/buttons';
 
 import './styles.scss';
+import { UserContext } from '../../contexts/user.context';
 
 const initialFormFields = {
   email: '',
@@ -22,6 +23,8 @@ const initialFormFields = {
 const SignInForm = () => {
   const [formFields, setFormFields] = useState(initialFormFields);
   const { email, password } = formFields;
+
+  const { setCurrentUser } = useContext(UserContext);
 
   // uncomment to use login google with redirect
   // useEffect(() => {
@@ -40,6 +43,8 @@ const SignInForm = () => {
   const loginGoogleWithPopup = async event => {
     const { user } = await signInWithGooglePopup();
 
+    setCurrentUser(user);
+
     const response = await createAuthUserFromDocFireBase(user);
 
     return response;
@@ -49,13 +54,16 @@ const SignInForm = () => {
     event.preventDefault();
 
     try {
-      const response = await signInAuthUserWithEmailAndPasswordFirebase(
+      const user = await signInAuthUserWithEmailAndPasswordFirebase(
         email,
         password
       );
+
+      setCurrentUser(user);
+
       clearFormFields();
 
-      return response;
+      return user;
     } catch (error) {
       if (
         error.code === AuthErrorCodes.USER_DELETED ||
