@@ -1,4 +1,4 @@
-import React, { Fragment, useState, useContext } from 'react';
+import React, { Fragment, useState } from 'react';
 import {
   createAuthUserFromDocFireBase,
   createAuthUserWithEmailAndPasswordFirebase,
@@ -10,7 +10,6 @@ import Button from '../Button/Button';
 import FormInput from '../FormInput/FormInput';
 
 import './styles.scss';
-import { UserContext } from '../../contexts/user.context';
 
 const initialFormFields = {
   displayName: '',
@@ -22,8 +21,6 @@ const initialFormFields = {
 const SignUpForm = () => {
   const [formFields, setFormFields] = useState(initialFormFields);
   const { displayName, email, password, confirmPassword } = formFields;
-
-  const { setCurrentUser } = useContext(UserContext);
 
   const handleSubmit = async event => {
     event.preventDefault();
@@ -38,13 +35,11 @@ const SignUpForm = () => {
         password
       );
 
-      setCurrentUser(user);
-      const response = await createAuthUserFromDocFireBase(user, {
+      await createAuthUserFromDocFireBase(user, {
         displayName,
       });
 
       clearFormFields();
-      return response;
     } catch (error) {
       if (error.code === AuthErrorCodes.EMAIL_EXISTS) {
         alert('Wrong or existed credentials');

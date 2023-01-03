@@ -1,4 +1,4 @@
-import React, { Fragment, useContext } from 'react';
+import React, { Fragment, useContext, useEffect, useState } from 'react';
 import { Link, Outlet } from 'react-router-dom';
 import {
   HOME_ROUTE,
@@ -15,18 +15,25 @@ import { UserContext } from '../../contexts/user.context';
 import { signOutUserFirebase } from '../../api/firebase/firebase';
 
 const NavRoute = () => {
-  const { currentUser, setCurrentUser } = useContext(UserContext);
+  const { currentUser } = useContext(UserContext);
+  const [isLogo, setIsLogo] = useState(false);
 
-  const handleSignOut = async () => {
-    await signOutUserFirebase();
-    setCurrentUser(null);
-  };
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setIsLogo(!isLogo);
+    }, 1000);
+    return () => clearTimeout(timer);
+  });
+
   return (
     <Fragment>
       <div className="navigation">
         <Link className="logo-container" to={`${HOME_ROUTE}`}>
-          {/* <LadiesLogo className="logo" /> */}
-          <GentsLogo className="logo" />
+          {isLogo ? (
+            <LadiesLogo className="logo" />
+          ) : (
+            <GentsLogo className="logo" />
+          )}
         </Link>
         <div className="nav-links-container">
           <Link className="nav-link" to={`${HOME_ROUTE}`}>
@@ -39,7 +46,7 @@ const NavRoute = () => {
             Contact
           </Link>
           {currentUser ? (
-            <span className="nav-link" onClick={handleSignOut}>
+            <span className="nav-link" onClick={signOutUserFirebase}>
               Sign Out
             </span>
           ) : (

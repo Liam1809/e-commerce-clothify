@@ -6,7 +6,13 @@ const FormInput = ({ label, id, ...otherProps }) => {
   return (
     <Fragment>
       <div className="group">
-        <input className="form-input" id={id} required {...otherProps} />
+        <input
+          autoComplete={id}
+          className="form-input"
+          id={id}
+          required
+          {...otherProps}
+        />
         {label && (
           <label
             htmlFor={id}

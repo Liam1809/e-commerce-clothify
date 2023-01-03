@@ -1,7 +1,6 @@
-import React, { Fragment, useState, useContext } from 'react';
+import React, { Fragment, useState } from 'react';
 import {
   signInWithGooglePopup,
-  createAuthUserFromDocFireBase,
   signInAuthUserWithEmailAndPasswordFirebase,
 } from '../../api/firebase/firebase';
 import { AuthErrorCodes } from 'firebase/auth';
@@ -13,7 +12,6 @@ import FormInput from '../FormInput/FormInput';
 import { BUTTON_TYPES } from '../../constants/buttons/buttons';
 
 import './styles.scss';
-import { UserContext } from '../../contexts/user.context';
 
 const initialFormFields = {
   email: '',
@@ -23,8 +21,6 @@ const initialFormFields = {
 const SignInForm = () => {
   const [formFields, setFormFields] = useState(initialFormFields);
   const { email, password } = formFields;
-
-  const { setCurrentUser } = useContext(UserContext);
 
   // uncomment to use login google with redirect
   // useEffect(() => {
@@ -40,30 +36,15 @@ const SignInForm = () => {
   //   loginGoogleWithRedirect();
   // }, []);
 
-  const loginGoogleWithPopup = async event => {
-    const { user } = await signInWithGooglePopup();
-
-    setCurrentUser(user);
-
-    const response = await createAuthUserFromDocFireBase(user);
-
-    return response;
-  };
+  const loginGoogleWithPopup = async () => await signInWithGooglePopup();
 
   const handleSubmit = async event => {
     event.preventDefault();
 
     try {
-      const user = await signInAuthUserWithEmailAndPasswordFirebase(
-        email,
-        password
-      );
-
-      setCurrentUser(user);
+      await signInAuthUserWithEmailAndPasswordFirebase(email, password);
 
       clearFormFields();
-
-      return user;
     } catch (error) {
       if (
         error.code === AuthErrorCodes.USER_DELETED ||
