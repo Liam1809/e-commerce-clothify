@@ -1,15 +1,8 @@
-import React, { Fragment, lazy, Suspense } from 'react';
-
+import React, { Fragment, Suspense } from 'react';
+import { SignInForm, SignUpForm } from '../../components';
 import './styles.scss';
 
-const AuthRoute = () => {
-  const SignInForm = lazy(() =>
-    import('../../components/SignInForm/SignInForm')
-  );
-  const SignUpForm = lazy(() =>
-    import('../../components/SignUpForm/SignUpForm')
-  );
-
+export const AuthRoute = () => {
   return (
     <Fragment>
       <Suspense fallback={<div>Loading</div>}>
@@ -21,5 +14,3 @@ const AuthRoute = () => {
     </Fragment>
   );
 };
-
-export default AuthRoute;

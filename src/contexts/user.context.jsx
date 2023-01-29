@@ -1,9 +1,6 @@
 import { useEffect } from 'react';
 import { createContext, useState } from 'react';
-import {
-  authStateFirebase,
-  createAuthUserFromDocFireBase,
-} from '../api/firebase/firebase';
+import { authStateFirebase, createAuthUserFromDocFireBase } from '../api';
 
 export const UserContext = createContext({
   currentUser: null,

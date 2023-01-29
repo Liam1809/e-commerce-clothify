@@ -1,20 +1,12 @@
 import React, { Fragment, useContext, useEffect, useState } from 'react';
 import { Link, Outlet } from 'react-router-dom';
-import {
-  HOME_ROUTE,
-  SHOP_ROUTE,
-  AUTH_ROUTE,
-} from '../../constants/routes/routes';
-
-//import logo
-import { ReactComponent as LadiesLogo } from '../../assets/ladies.svg';
-import { ReactComponent as GentsLogo } from '../../assets/gents.svg';
-
+import { UserContext } from '../../contexts';
+import { signOutUserFirebase } from '../../api';
+import { HOME_ROUTE, SHOP_ROUTE, AUTH_ROUTE } from '../../constants';
+import { LadiesLogo, GentsLogo } from '../../assets';
 import './styles.scss';
-import { UserContext } from '../../contexts/user.context';
-import { signOutUserFirebase } from '../../api/firebase/firebase';
 
-const NavRoute = () => {
+export const NavRoute = () => {
   const { currentUser } = useContext(UserContext);
   const [isLogo, setIsLogo] = useState(false);
 
@@ -60,5 +52,3 @@ const NavRoute = () => {
     </Fragment>
   );
 };
-
-export default NavRoute;

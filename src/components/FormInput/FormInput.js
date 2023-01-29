@@ -1,8 +1,7 @@
 import React, { Fragment } from 'react';
-
 import './styles.scss';
 
-const FormInput = ({ label, id, ...otherProps }) => {
+export const FormInput = ({ label, id, ...otherProps }) => {
   return (
     <Fragment>
       <div className="group">
@@ -27,5 +26,3 @@ const FormInput = ({ label, id, ...otherProps }) => {
     </Fragment>
   );
 };
-
-export default FormInput;

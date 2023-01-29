@@ -1,9 +1,8 @@
 import React, { Fragment } from 'react';
-import { BUTTON_TYPES } from '../../constants/buttons/buttons';
-
+import { BUTTON_TYPES } from '../../constants';
 import './styles.scss';
 
-const Button = ({ buttonType, children, ...otherProps }) => {
+export const Button = ({ buttonType, children, ...otherProps }) => {
   return (
     <Fragment>
       <button
@@ -15,5 +14,3 @@ const Button = ({ buttonType, children, ...otherProps }) => {
     </Fragment>
   );
 };
-
-export default Button;

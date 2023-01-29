@@ -2,13 +2,10 @@ import React, { Fragment, useState } from 'react';
 import {
   createAuthUserFromDocFireBase,
   createAuthUserWithEmailAndPasswordFirebase,
-} from '../../api/firebase/firebase';
+} from '../../api';
 import { AuthErrorCodes } from 'firebase/auth';
 // import { getRedirectResult } from 'firebase/auth';
-
-import Button from '../Button/Button';
-import FormInput from '../FormInput/FormInput';
-
+import { Button, FormInput } from '../index';
 import './styles.scss';
 
 const initialFormFields = {
@@ -18,7 +15,7 @@ const initialFormFields = {
   confirmPassword: '',
 };
 
-const SignUpForm = () => {
+export const SignUpForm = () => {
   const [formFields, setFormFields] = useState(initialFormFields);
   const { displayName, email, password, confirmPassword } = formFields;
 
@@ -119,5 +116,3 @@ const SignUpForm = () => {
     </Fragment>
   );
 };
-
-export default SignUpForm;

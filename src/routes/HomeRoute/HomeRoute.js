@@ -1,12 +1,7 @@
-import React, { Fragment, lazy } from 'react';
+import React, { Fragment } from 'react';
+import { ErrorBoundary, Categories } from '../../components';
 
-// lazy import component
-const ErrorBoundary = lazy(() =>
-  import('../../components/ErrorBoundary/ErrorBoundary')
-);
-const Categories = lazy(() => import('../../components/Categories/Categories'));
-
-const HomeRoute = () => {
+export const HomeRoute = () => {
   return (
     <Fragment>
       <ErrorBoundary>
@@ -15,5 +10,3 @@ const HomeRoute = () => {
     </Fragment>
   );
 };
-
-export default HomeRoute;

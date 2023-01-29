@@ -1,7 +1,7 @@
 import React from 'react';
-import Category from './Category/Category';
-
+import { Category } from './Category/Category';
 import './styles.scss';
+
 const arr = [
   {
     id: 1,
@@ -30,11 +30,9 @@ const arr = [
   },
 ];
 
-const Categories = ({ title }) => {
+export const Categories = ({ title }) => {
   const CategoriesArr = arr.map((category, i) => (
     <Category title={category.title} imageUrl={category.imageUrl} key={i} />
   ));
   return <div className="categories-container">{CategoriesArr}</div>;
 };
-
-export default Categories;

@@ -1,9 +1,11 @@
-import React from 'react';
-import ShopData from '../../shop-data.json';
-const ShopRoute = () => {
+import React, { useContext } from 'react';
+import { ProductContext } from '../../contexts';
+
+export const ShopRoute = () => {
+  const { products } = useContext(ProductContext);
   return (
     <div>
-      {ShopData.map(({ id, name }) => (
+      {products.map(({ id, name }) => (
         <div key={id}>
           <h1>{name}</h1>
         </div>
@@ -11,5 +13,3 @@ const ShopRoute = () => {
     </div>
   );
 };
-
-export default ShopRoute;

@@ -2,15 +2,11 @@ import React, { Fragment, useState } from 'react';
 import {
   signInWithGooglePopup,
   signInAuthUserWithEmailAndPasswordFirebase,
-} from '../../api/firebase/firebase';
+} from '../../api';
 import { AuthErrorCodes } from 'firebase/auth';
 // import { getRedirectResult } from 'firebase/auth';
-
-import Button from '../Button/Button';
-import FormInput from '../FormInput/FormInput';
-
-import { BUTTON_TYPES } from '../../constants/buttons/buttons';
-
+import { Button, FormInput } from '../index';
+import { BUTTON_TYPES } from '../../constants';
 import './styles.scss';
 
 const initialFormFields = {
@@ -18,7 +14,7 @@ const initialFormFields = {
   password: '',
 };
 
-const SignInForm = () => {
+export const SignInForm = () => {
   const [formFields, setFormFields] = useState(initialFormFields);
   const { email, password } = formFields;
 
@@ -124,5 +120,3 @@ const SignInForm = () => {
     </Fragment>
   );
 };
-
-export default SignInForm;
